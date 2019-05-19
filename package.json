@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/agilgur5/mst-persist/issues"
   },
-  "homepage": "https://github.com/agilgur5/mst-persist"
+  "homepage": "https://github.com/agilgur5/mst-persist",
+  "peerDependencies": {
+    "mobx-state-tree": "^3.2.1"
+  }
 }
