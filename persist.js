@@ -41,3 +41,5 @@ function arrToDict (arr) {
     return dict
   }, {})
 }
+
+export default persist
