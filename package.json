@@ -1,0 +1,27 @@
+{
+  "name": "mst-persist",
+  "version": "0.0.1",
+  "description": "Persist and hydrate MobX-state-tree stores",
+  "main": "persist.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agilgur5/mst-persist.git"
+  },
+  "keywords": [
+    "mobx",
+    "mobx-state-tree",
+    "mst",
+    "persist",
+    "hydrate",
+    "storage"
+  ],
+  "author": "Anton Gilgur",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/agilgur5/mst-persist/issues"
+  },
+  "homepage": "https://github.com/agilgur5/mst-persist"
+}
