@@ -11,7 +11,7 @@
 
 [![NPM](https://nodei.co/npm/mst-persist.png?downloads=true&downloadRank=true&stars=true)](https://npmjs.org/package/mst-persist)
 
-Persist and hydrate MobX-state-tree stores.
+Persist and hydrate [MobX-state-tree](https://github.com/mobxjs/mobx-state-tree) stores.
 
 ## Installation
 
