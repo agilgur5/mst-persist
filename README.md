@@ -59,6 +59,11 @@ persist('some', someStore, {
 
 - returns a void Promise
 
+## Examples
+
+None yet, but can take a look at [agilgur5/react-native-manga-reader-app](https://github.com/agilgur5/react-native-manga-reader-app) which uses it in production.
+Can view the commit that implements it [here](https://github.com/agilgur5/react-native-manga-reader-app/pull/2/commits/286725f417d321f25d16ee3858b0e7e6b7886e77).
+
 ## How it works
 
 Basically just a small wrapper around MST's `onSnapshot` and `applySnapshot`.
