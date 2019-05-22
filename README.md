@@ -15,10 +15,7 @@ Persist and hydrate [MobX-state-tree](https://github.com/mobxjs/mobx-state-tree)
 
 ## Installation
 
-`npm i -S agilgur5/mst-persist`
-
-The `mst-persist` NPM package is not currently owned by me, so please install via GitHub for now.
-Will be looking to get ownership of the package [from the owner](https://github.com/pinqy520/mobx-persist/issues/37#issuecomment-361479253) shortly.
+`npm i -S mst-persist`
 
 ## Usage
 
