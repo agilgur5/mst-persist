@@ -30,6 +30,8 @@ export const persist = (name, store, options = {}) => {
   return storage.getItem(name)
     .then((data) => {
       const snapshot = !jsonify ? data : JSON.parse(data)
+      // don't apply falsey (which will error), leave store in initial state
+      if (!snapshot) { return }
       applySnapshot(store, snapshot)
     })
 }
