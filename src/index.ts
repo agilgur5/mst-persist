@@ -16,7 +16,12 @@ type StrToAnyMap = {[key: string]: any}
 export const persist: IArgs = (name, store, options = {}) => {
   let {storage, jsonify, whitelist, blacklist} = options
 
-  if (typeof window.localStorage !== 'undefined' && (!storage || storage === window.localStorage)) {
+  // use AsyncLocalStorage by default (or if localStorage was passed in)
+  if (
+    typeof window !== 'undefined' &&
+    typeof window.localStorage !== 'undefined' &&
+    (!storage || storage === window.localStorage)
+  ) {
     storage = AsyncLocalStorage
   }
   if (!jsonify) { jsonify = true } // default to true like mobx-persist
