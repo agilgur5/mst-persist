@@ -1,12 +1,12 @@
 import { onSnapshot, applySnapshot } from 'mobx-state-tree'
 
-import * as LocalStorage from './localStorageAdaptor.js'
+import * as AsyncLocalStorage from './asyncLocalStorage.js'
 
 export const persist = (name, store, options = {}) => {
   let {storage, jsonify, whitelist, blacklist} = options
 
   if (typeof window.localStorage !== 'undefined' && (!storage || storage === window.localStorage)) {
-    storage = LocalStorage
+    storage = AsyncLocalStorage
   }
   if (!jsonify) { jsonify = true } // default to true like mobx-persist
   const whitelistDict = arrToDict(whitelist)
