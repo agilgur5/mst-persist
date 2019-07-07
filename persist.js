@@ -5,7 +5,11 @@ import * as LocalStorage from './localStorageAdaptor.js'
 export const persist = (name, store, options = {}) => {
   let {storage, jsonify, whitelist, blacklist} = options
 
-  if (typeof window.localStorage !== 'undefined' && (!storage || storage === window.localStorage)) {
+  if (
+  	typeof window !== 'undefined'
+  	&& typeof window.localStorage !== 'undefined'
+  	&& (!storage || storage === window.localStorage)
+  ) {
     storage = LocalStorage
   }
   if (!jsonify) { jsonify = true } // default to true like mobx-persist
