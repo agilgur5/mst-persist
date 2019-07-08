@@ -22,7 +22,7 @@ export const persist: IArgs = (name, store, options = {}) => {
   const whitelistDict = arrToDict(whitelist)
   const blacklistDict = arrToDict(blacklist)
 
-  onSnapshot(store, (_snapshot) => {
+  onSnapshot(store, (_snapshot: any) => {
     const snapshot = { ..._snapshot }
     Object.keys(snapshot).forEach((key) => {
       if (whitelist && !whitelistDict[key]) {
@@ -46,9 +46,11 @@ export const persist: IArgs = (name, store, options = {}) => {
     })
 }
 
-function arrToDict (arr?: Array<string>): object {
+type StrToBoolMap = {[key: string]: boolean}
+
+function arrToDict (arr?: Array<string>): StrToBoolMap {
   if (!arr) { return {} }
-  return arr.reduce((dict, elem) => {
+  return arr.reduce((dict: StrToBoolMap, elem) => {
     dict[elem] = true
     return dict
   }, {})
