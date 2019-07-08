@@ -2,7 +2,9 @@
   "name": "mst-persist",
   "version": "0.0.2",
   "description": "Persist and hydrate MobX-state-tree stores",
-  "main": "dist/mst-persist.esm.js",
+  "main": "dist/index.js",
+  "module": "dist/mst-persist.esm.js",
+  "typings": "dist/index.d.ts",
   "files": [
     "dist/"
   ],
