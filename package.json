@@ -2,9 +2,9 @@
   "name": "mst-persist",
   "version": "0.0.2",
   "description": "Persist and hydrate MobX-state-tree stores",
-  "main": "src/index.js",
+  "main": "dist/mst-persist.esm.js",
   "files": [
-    "src/"
+    "dist/"
   ],
   "scripts": {
     "start": "tsdx watch",
@@ -33,6 +33,8 @@
     "mobx-state-tree": "^3.2.1"
   },
   "devDependencies": {
+    "mobx": "^5.11.0",
+    "mobx-state-tree": "^3.14.0",
     "tsdx": "^0.7.2",
     "typescript": "^3.5.2"
   }

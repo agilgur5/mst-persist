@@ -1,8 +1,18 @@
 import { onSnapshot, applySnapshot } from 'mobx-state-tree'
 
-import AsyncLocalStorage from './asyncLocalStorage.js'
+import AsyncLocalStorage from './asyncLocalStorage'
 
-export const persist = (name, store, options = {}) => {
+export interface IArgs {
+  (name: string, store: object, options?: IOptions): Promise<void>
+}
+export interface IOptions {
+  storage?: any,
+  jsonify?: boolean,
+  readonly whitelist?: Array<string>,
+  readonly blacklist?: Array<string>
+}
+
+export const persist: IArgs = (name, store, options = {}) => {
   let {storage, jsonify, whitelist, blacklist} = options
 
   if (typeof window.localStorage !== 'undefined' && (!storage || storage === window.localStorage)) {
@@ -28,7 +38,7 @@ export const persist = (name, store, options = {}) => {
   })
 
   return storage.getItem(name)
-    .then((data) => {
+    .then((data: any) => {
       const snapshot = !jsonify ? data : JSON.parse(data)
       // don't apply falsey (which will error), leave store in initial state
       if (!snapshot) { return }
@@ -36,7 +46,7 @@ export const persist = (name, store, options = {}) => {
     })
 }
 
-function arrToDict (arr) {
+function arrToDict (arr?: Array<string>): object {
   if (!arr) { return {} }
   return arr.reduce((dict, elem) => {
     dict[elem] = true

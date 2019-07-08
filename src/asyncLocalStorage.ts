@@ -1,4 +1,11 @@
-export const AsyncLocalStorage = {
+interface IAsyncLocalStorage {
+  clear(): Promise<void>
+  getItem(key: string): Promise<string>
+  removeItem(key: string): Promise<void>
+  setItem(key: string, value: string): Promise<void>
+}
+
+export const AsyncLocalStorage: IAsyncLocalStorage = {
   clear () {
     return callWithPromise(window.localStorage.clear)
   },
@@ -13,7 +20,7 @@ export const AsyncLocalStorage = {
   }
 }
 
-function callWithPromise (func, ...args) {
+function callWithPromise (func: Function, ...args: any[]): Promise<any> {
   try {
     return Promise.resolve(func(...args))
   } catch (err) {
