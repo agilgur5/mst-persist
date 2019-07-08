@@ -1,6 +1,6 @@
 import { onSnapshot, applySnapshot } from 'mobx-state-tree'
 
-import * as AsyncLocalStorage from './asyncLocalStorage.js'
+import AsyncLocalStorage from './asyncLocalStorage.js'
 
 export const persist = (name, store, options = {}) => {
   let {storage, jsonify, whitelist, blacklist} = options
