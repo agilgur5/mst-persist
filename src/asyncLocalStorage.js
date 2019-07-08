@@ -1,17 +1,16 @@
-export function clear () {
-  return callWithPromise(window.localStorage.clear)
-}
-
-export function getItem (key) {
-  return callWithPromise(window.localStorage.getItem, key)
-}
-
-export function removeItem (key) {
-  return callWithPromise(window.localStorage.removeItem, key)
-}
-
-export function setItem (key, value) {
-  return callWithPromise(window.localStorage.setItem, key, value)
+export const AsyncLocalStorage = {
+  clear () {
+    return callWithPromise(window.localStorage.clear)
+  },
+  getItem (key) {
+    return callWithPromise(window.localStorage.getItem, key)
+  },
+  removeItem (key) {
+    return callWithPromise(window.localStorage.removeItem, key)
+  },
+  setItem (key, value) {
+    return callWithPromise(window.localStorage.setItem, key, value)
+  }
 }
 
 function callWithPromise (func, ...args) {
@@ -21,3 +20,5 @@ function callWithPromise (func, ...args) {
     return Promise.reject(err)
   }
 }
+
+export default AsyncLocalStorage
