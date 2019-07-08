@@ -7,6 +7,8 @@
     "src/"
   ],
   "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -29,5 +31,9 @@
   "homepage": "https://github.com/agilgur5/mst-persist",
   "peerDependencies": {
     "mobx-state-tree": "^3.2.1"
+  },
+  "devDependencies": {
+    "tsdx": "^0.7.2",
+    "typescript": "^3.5.2"
   }
 }
