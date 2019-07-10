@@ -58,8 +58,16 @@ persist('some', someStore, {
     - **jsonify** *bool* Enables serialization as JSON (default: `true`).
     - **whitelist** *Array\<string\>* Only these keys will be persisted (defaults to all keys).
     - **blacklist** *Array\<string\>* These keys will not be persisted (defaults to all keys).
+    - **nodeNoop** *bool* Whether this should no-op in a Node environment (default: `true`). See below for more details.
 
 - returns a void Promise
+
+### Node and SSR Usage
+
+To support Server-Side Rendering (SSR) out-of-the-box, `persist` will no-op in a Node environment by default.<br>
+Please note that it uses `typeof window === 'undefined'` to check. [`window` is defined in React Native](https://stackoverflow.com/questions/49911424/what-does-the-variable-window-represent-in-react-native), but may not be in test runners and other simulated environments.
+
+If you'd like to hydrate your store in Node (vs. in the browser, which is the standard usage), set `nodeNoop` to `false` and `storage` to a supported provider for Node.
 
 ## Examples
 

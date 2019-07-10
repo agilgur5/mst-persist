@@ -9,14 +9,25 @@ export interface IOptions {
   storage?: any,
   jsonify?: boolean,
   readonly whitelist?: Array<string>,
-  readonly blacklist?: Array<string>
+  readonly blacklist?: Array<string>,
+  nodeNoop?: boolean
 }
 type StrToAnyMap = {[key: string]: any}
 
 export const persist: IArgs = (name, store, options = {}) => {
-  let {storage, jsonify, whitelist, blacklist} = options
+  let {storage, jsonify, whitelist, blacklist, nodeNoop} = options
 
-  if (typeof window.localStorage !== 'undefined' && (!storage || storage === window.localStorage)) {
+  // no-op in node by default to support SSR out-of-the-box
+  // require explicit opt-in to hydrate server-side
+  if (!nodeNoop) { nodeNoop = true }
+  if (nodeNoop && typeof window === 'undefined') { return Promise.resolve() }
+
+  // use AsyncLocalStorage by default or if window.localStorage was passed in
+  if (
+    typeof window !== 'undefined' &&
+    typeof window.localStorage !== 'undefined' &&
+    (!storage || storage === window.localStorage)
+  ) {
     storage = AsyncLocalStorage
   }
   if (!storage) {
