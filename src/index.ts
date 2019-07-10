@@ -1,9 +1,9 @@
-import { onSnapshot, applySnapshot } from 'mobx-state-tree'
+import { onSnapshot, applySnapshot, IStateTreeNode } from 'mobx-state-tree'
 
 import AsyncLocalStorage from './asyncLocalStorage'
 
 export interface IArgs {
-  (name: string, store: object, options?: IOptions): Promise<void>
+  (name: string, store: IStateTreeNode, options?: IOptions): Promise<void>
 }
 export interface IOptions {
   storage?: any,
@@ -11,6 +11,7 @@ export interface IOptions {
   readonly whitelist?: Array<string>,
   readonly blacklist?: Array<string>
 }
+type StrToAnyMap = {[key: string]: any}
 
 export const persist: IArgs = (name, store, options = {}) => {
   let {storage, jsonify, whitelist, blacklist} = options
@@ -22,7 +23,7 @@ export const persist: IArgs = (name, store, options = {}) => {
   const whitelistDict = arrToDict(whitelist)
   const blacklistDict = arrToDict(blacklist)
 
-  onSnapshot(store, (_snapshot: any) => {
+  onSnapshot(store, (_snapshot: StrToAnyMap) => {
     const snapshot = { ..._snapshot }
     Object.keys(snapshot).forEach((key) => {
       if (whitelist && !whitelistDict[key]) {
@@ -38,8 +39,8 @@ export const persist: IArgs = (name, store, options = {}) => {
   })
 
   return storage.getItem(name)
-    .then((data: any) => {
-      const snapshot = !jsonify ? data : JSON.parse(data)
+    .then((data: object | string) => {
+      const snapshot = !isString(data) ? data : JSON.parse(data)
       // don't apply falsey (which will error), leave store in initial state
       if (!snapshot) { return }
       applySnapshot(store, snapshot)
@@ -54,6 +55,10 @@ function arrToDict (arr?: Array<string>): StrToBoolMap {
     dict[elem] = true
     return dict
   }, {})
+}
+
+function isString (value: any): value is string {
+  return typeof value === 'string'
 }
 
 export default persist
