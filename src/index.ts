@@ -19,7 +19,10 @@ export const persist: IArgs = (name, store, options = {}) => {
 
   // no-op in node by default to support SSR out-of-the-box
   // require explicit opt-in to hydrate server-side
-  if (!nodeNoop) { nodeNoop = true }
+  // tests are generally run in Node, so don't require the option to be set
+  // in them, ensuring full backward-compatibility and easier testing for
+  // universal storage engines
+  if (!nodeNoop && process.env.NODE_ENV !== 'test') { nodeNoop = true }
   if (nodeNoop && typeof window === 'undefined') { return Promise.resolve() }
 
   // use AsyncLocalStorage by default or if window.localStorage was passed in
