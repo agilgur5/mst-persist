@@ -1,6 +1,9 @@
 {
   "name": "mst-persist",
   "version": "0.0.2",
+  "publishConfig": {
+    "tag": "v0.0.x"
+  },
   "description": "Persist and hydrate MobX-state-tree stores",
   "main": "src/index.js",
   "files": [
