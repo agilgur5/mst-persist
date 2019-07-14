@@ -19,6 +19,12 @@ export const persist: IArgs = (name, store, options = {}) => {
   if (typeof window.localStorage !== 'undefined' && (!storage || storage === window.localStorage)) {
     storage = AsyncLocalStorage
   }
+  if (!storage) {
+    return Promise.reject('localStorage (the default storage engine) is not ' +
+      'supported in this environment. Please configure a different storage ' +
+      'engine via the `storage:` option.')
+  }
+
   if (!jsonify) { jsonify = true } // default to true like mobx-persist
   const whitelistDict = arrToDict(whitelist)
   const blacklistDict = arrToDict(blacklist)
