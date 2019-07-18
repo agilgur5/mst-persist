@@ -1,19 +1,17 @@
 # mst-persist
 
-[//]: # (releases / versioning)
+<!-- releases / versioning -->
 [![package-json](https://img.shields.io/github/package-json/v/agilgur5/mst-persist.svg)](https://npmjs.org/package/mst-persist)
 [![releases](https://img.shields.io/github/release/agilgur5/mst-persist.svg)](https://github.com/agilgur5/mst-persist/releases)
 [![commits](https://img.shields.io/github/commits-since/agilgur5/mst-persist/latest.svg)](https://github.com/agilgur5/mst-persist/commits/master)
-
-[//]: # (downloads)
+<br><!-- downloads -->
 [![dt](https://img.shields.io/npm/dt/mst-persist.svg)](https://npmjs.org/package/mst-persist)
 [![dy](https://img.shields.io/npm/dy/mst-persist.svg)](https://npmjs.org/package/mst-persist)
 [![dm](https://img.shields.io/npm/dm/mst-persist.svg)](https://npmjs.org/package/mst-persist)
 [![dw](https://img.shields.io/npm/dw/mst-persist.svg)](https://npmjs.org/package/mst-persist)
-
-[//]: # (status / activity)
+<br><!-- status / activity -->
 [![typings](https://img.shields.io/npm/types/mst-persist.svg)](https://github.com/agilgur5/mst-persist/blob/master/src/index.ts)
-
+<br>
 [![NPM](https://nodei.co/npm/mst-persist.png?downloads=true&downloadRank=true&stars=true)](https://npmjs.org/package/mst-persist)
 
 Persist and hydrate [MobX-state-tree](https://github.com/mobxjs/mobx-state-tree) stores.
