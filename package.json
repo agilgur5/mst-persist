@@ -11,7 +11,7 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build && npm pack"
   },
   "repository": {
     "type": "git",
