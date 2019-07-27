@@ -53,7 +53,10 @@ persist('some', someStore, {
   - **key** *string* The key of your storage engine that you want to persist to.
   - **store** *MST store* The store to be persisted.
   - **options** *object* Additional configuration options.
-    - **storage** *[localForage](https://github.com/localForage/localForage) / AsyncStorage / localStorage* [localForage](https://github.com/localForage/localForage)-style storage API. localStorage for Web (default), AsyncStorage for React Native.
+    - **storage** *[localForage](https://github.com/localForage/localForage) / AsyncStorage / localStorage*
+      Any Storage Engine that has a Promise-style API similar to [`localForage`](https://github.com/localForage/localForage).
+      The default is `localStorage`, which has a built-in adaptor to make it support Promises.
+      For React Native, one may configure `AsyncStorage` instead.
     - **jsonify** *bool* Enables serialization as JSON (default: `true`).
     - **whitelist** *Array\<string\>* Only these keys will be persisted (defaults to all keys).
     - **blacklist** *Array\<string\>* These keys will not be persisted (defaults to all keys).
