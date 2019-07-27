@@ -65,6 +65,21 @@ persist('some', someStore, {
 
 - returns a void Promise
 
+### Node and Server-Side Rendering (SSR) Usage
+
+Node environments are supported so long as you configure a Storage Engine that supports Node, such as [`redux-persist-node-storage`](https://github.com/pellejacobs/redux-persist-node-storage), [`redux-persist-cookie-storage`](https://github.com/abersager/redux-persist-cookie-storage), etc.
+This allows you to hydrate your store server-side.
+
+For SSR though, you may not want to hydrate your store server-side, so in that case you can call `persist` conditionally:
+
+```javascript
+if (typeof window !== 'undefined') { // window is undefined in Node
+  persist(...)
+}
+```
+
+With this conditional check, your store will only be hydrated client-side.
+
 ## Examples
 
 None yet, but can take a look at [agilgur5/react-native-manga-reader-app](https://github.com/agilgur5/react-native-manga-reader-app) which uses it in production.
