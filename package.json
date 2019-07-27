@@ -30,6 +30,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "npm run build && npm pack",
+    "pub": "npm run build && npm publish",
     "changelog": "changelog-maker"
   },
   "peerDependencies": {
