@@ -8,15 +8,15 @@
   "files": [
     "dist/"
   ],
-  "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "npm run build && npm pack",
-    "changelog": "changelog-maker"
-  },
+  "author": "Anton Gilgur",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/agilgur5/mst-persist",
   "repository": {
     "type": "git",
     "url": "https://github.com/agilgur5/mst-persist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/agilgur5/mst-persist/issues"
   },
   "keywords": [
     "mobx",
@@ -26,15 +26,16 @@
     "hydrate",
     "storage"
   ],
-  "author": "Anton Gilgur",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/agilgur5/mst-persist/issues"
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "npm run build && npm pack",
+    "changelog": "changelog-maker"
   },
-  "homepage": "https://github.com/agilgur5/mst-persist",
   "peerDependencies": {
     "mobx-state-tree": "^3.2.1"
   },
+  "dependencies": {},
   "devDependencies": {
     "@agilgur5/changelog-maker": "^3.0.0",
     "mobx": "^5.11.0",
