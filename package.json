@@ -11,11 +11,12 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
-    "test": "npm run build && npm pack"
+    "test": "npm run build && npm pack",
+    "changelog": "changelog-maker"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/agilgur5/mst-persist.git"
+    "url": "https://github.com/agilgur5/mst-persist.git"
   },
   "keywords": [
     "mobx",
@@ -35,6 +36,7 @@
     "mobx-state-tree": "^3.2.1"
   },
   "devDependencies": {
+    "@agilgur5/changelog-maker": "^3.0.0",
     "mobx": "^5.11.0",
     "mobx-state-tree": "^3.14.0",
     "tsdx": "^0.7.2",
