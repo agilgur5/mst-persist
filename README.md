@@ -57,6 +57,8 @@ persist('some', someStore, {
       Any Storage Engine that has a Promise-style API similar to [`localForage`](https://github.com/localForage/localForage).
       The default is `localStorage`, which has a built-in adaptor to make it support Promises.
       For React Native, one may configure `AsyncStorage` instead.
+      <br>
+      Any of [`redux-persist`'s Storage Engines](https://github.com/rt2zz/redux-persist#storage-engines) should also be compatible with `mst-persist`.
     - **jsonify** *bool* Enables serialization as JSON (default: `true`).
     - **whitelist** *Array\<string\>* Only these keys will be persisted (defaults to all keys).
     - **blacklist** *Array\<string\>* These keys will not be persisted (defaults to all keys).
