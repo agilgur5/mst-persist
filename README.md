@@ -2,8 +2,8 @@
 
 <!-- releases / versioning -->
 [![package-json](https://img.shields.io/github/package-json/v/agilgur5/mst-persist.svg)](https://npmjs.org/package/mst-persist)
-[![releases](https://img.shields.io/github/release/agilgur5/mst-persist.svg)](https://github.com/agilgur5/mst-persist/releases)
-[![commits](https://img.shields.io/github/commits-since/agilgur5/mst-persist/latest.svg)](https://github.com/agilgur5/mst-persist/commits/master)
+[![releases](https://img.shields.io/github/tag-pre/agilgur5/mst-persist.svg)](https://github.com/agilgur5/mst-persist/releases)
+[![commits](https://img.shields.io/github/commits-since/agilgur5/mst-persist/v0.1.0.svg)](https://github.com/agilgur5/mst-persist/commits/master)
 <br><!-- downloads -->
 [![dt](https://img.shields.io/npm/dt/mst-persist.svg)](https://npmjs.org/package/mst-persist)
 [![dy](https://img.shields.io/npm/dy/mst-persist.svg)](https://npmjs.org/package/mst-persist)
