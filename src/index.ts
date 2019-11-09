@@ -9,12 +9,21 @@ export interface IOptions {
   storage?: any,
   jsonify?: boolean,
   readonly whitelist?: Array<string>,
-  readonly blacklist?: Array<string>
+  readonly blacklist?: Array<string>,
+  readonly transforms?: Array<ITransform>
 }
 type StrToAnyMap = {[key: string]: any}
 
+export interface ITransform {
+  readonly toStorage?: ITransformArgs,
+  readonly fromStorage?: ITransformArgs
+}
+export interface ITransformArgs {
+  (snapshot: StrToAnyMap): StrToAnyMap
+}
+
 export const persist: IArgs = (name, store, options = {}) => {
-  let {storage, jsonify = true, whitelist, blacklist} = options
+  let {storage, jsonify = true, whitelist, blacklist, transforms = []} = options
 
   // use AsyncLocalStorage by default (or if localStorage was passed in)
   if (
@@ -45,6 +54,10 @@ export const persist: IArgs = (name, store, options = {}) => {
       }
     })
 
+    transforms.forEach((transform) => {
+      if (transform.toStorage) { transform.toStorage(snapshot) }
+    })
+
     const data = !jsonify ? snapshot : JSON.stringify(snapshot)
     storage.setItem(name, data)
   })
@@ -54,6 +67,12 @@ export const persist: IArgs = (name, store, options = {}) => {
       const snapshot = !isString(data) ? data : JSON.parse(data)
       // don't apply falsey (which will error), leave store in initial state
       if (!snapshot) { return }
+
+      // in reverse order, like a stack, so that last transform is first
+      transforms.slice().reverse().forEach((transform) => {
+        if (transform.fromStorage) { transform.fromStorage(snapshot) }
+      })
+
       applySnapshot(store, snapshot)
     })
 }
