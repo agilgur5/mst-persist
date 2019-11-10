@@ -4,10 +4,10 @@ export function whitelistKeys (whitelist?: Array<string>): ITransform {
   const whitelistDict = arrToDict(whitelist)
 
   return {toStorage: function whitelistTransform (snapshot) {
+    if (!whitelist) { return snapshot }
+
     Object.keys(snapshot).forEach((key) => {
-      if (whitelist && !whitelistDict[key]) {
-        delete snapshot[key]
-      }
+      if (!whitelistDict[key]) { delete snapshot[key] }
     })
     return snapshot
   }}
