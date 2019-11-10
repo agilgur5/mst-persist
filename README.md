@@ -125,8 +125,8 @@ Can view the commit that implements it [here](https://github.com/agilgur5/react-
 
 ## How it works
 
-Basically just a small wrapper around MST's [`onSnapshot` and `applySnapshot`](https://github.com/mobxjs/mobx-state-tree#snapshots).
-The source code is currently shorter than this README, so [take a look under the hood](https://github.com/agilgur5/mst-persist/tree/master/src)! :)
+Basically a small wrapper around MST's [`onSnapshot` and `applySnapshot`](https://github.com/mobxjs/mobx-state-tree#snapshots).
+The source code is not much longer than this README, so [take a look under the hood](https://github.com/agilgur5/mst-persist/tree/master/src)! :)
 
 ## Credits
 
