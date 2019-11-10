@@ -63,8 +63,45 @@ persist('some', someStore, {
     - **jsonify** *bool* Enables serialization as JSON (default: `true`).
     - **whitelist** *Array\<string\>* Only these keys will be persisted (defaults to all keys).
     - **blacklist** *Array\<string\>* These keys will not be persisted (defaults to all keys).
+    - **transforms** *Array\<[Transform](#transforms)\>* [Transforms](#transforms) to apply to snapshots on the way to and from storage.
 
 - returns a void Promise
+
+### Transforms
+
+Transforms allow you to customize the [snapshot](https://github.com/mobxjs/mobx-state-tree#snapshots) that is persisted and used to hydrate your store.
+
+Transforms are `object`s with `toStorage` and `fromStorage` functions that are called with a `snapshot`-like argument and expected to return a `snapshot`-like object:
+
+```typescript
+interface ITransform {
+  readonly toStorage?: ITransformArgs,
+  readonly fromStorage?: ITransformArgs
+}
+interface ITransformArgs {
+  (snapshot: StrToAnyMap): StrToAnyMap
+}
+type StrToAnyMap = {[key: string]: any}
+```
+
+As an example, one may see how [whitelists](https://github.com/agilgur5/mst-persist/blob/229fd2b1b472ea6a7912a5a06fa079a65e3ba6fa/src/whitelistTransform.ts#L7-L14) and [blacklists](https://github.com/agilgur5/mst-persist/blob/229fd2b1b472ea6a7912a5a06fa079a65e3ba6fa/src/blacklistTransform.ts#L7-L14) are implemented internally as transforms.
+
+#### Transform Ordering
+
+`toStorage` functions are called serially in the order specified in the `transforms` configuration array.
+`fromStorage` functions are called in the reverse order, such that the last transform is first.
+
+Before any `toStorage` functions are run, the snapshot will first be stripped of any keys as specified by the `whitelist` and `blacklist` configuration.
+Then, once the `toStorage` functions are all run, the object will be serialized to JSON, if that configuration is enabled.
+
+Before any `fromStorage` functions are run, the JSON will be deserialized into an object, if that configuration is enabled.
+
+To put this visually with some pseudo-code:
+
+```text
+onSnapshot -> whitelist -> blacklist -> transforms toStorage -> JSON.stringify -> Storage.setItem
+Storage.getItem -> JSON.parse -> transforms.reverse() fromStorage -> applySnapshot
+```
 
 ### Node and Server-Side Rendering (SSR) Usage
 
