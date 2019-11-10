@@ -51,12 +51,12 @@ persist('some', someStore, {
 
 - arguments
   - **key** *string* The key of your storage engine that you want to persist to.
-  - **store** *MST store* The store to be persisted.
+  - **store** *[MST](https://github.com/mobxjs/mobx-state-tree) store* The store to be persisted.
   - **options** *object* Additional configuration options.
-    - **storage** *[localForage](https://github.com/localForage/localForage) / AsyncStorage / localStorage*
+    - **storage** *[localForage](https://github.com/localForage/localForage) / [AsyncStorage](https://github.com/react-native-community/async-storage) / [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)*
       Any Storage Engine that has a Promise-style API similar to [`localForage`](https://github.com/localForage/localForage).
-      The default is `localStorage`, which has a built-in adaptor to make it support Promises.
-      For React Native, one may configure `AsyncStorage` instead.
+      The default is [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage), which has a built-in adaptor to make it support Promises.
+      For React Native, one may configure [`AsyncStorage`](https://github.com/react-native-community/async-storage) instead.
       <br>
       Any of [`redux-persist`'s Storage Engines](https://github.com/rt2zz/redux-persist#storage-engines) should also be compatible with `mst-persist`.
     - **jsonify** *bool* Enables serialization as JSON (default: `true`).
@@ -87,8 +87,8 @@ Can view the commit that implements it [here](https://github.com/agilgur5/react-
 
 ## How it works
 
-Basically just a small wrapper around MST's `onSnapshot` and `applySnapshot`.
-The source code is currently shorter than this README, so take a look under the hood! :)
+Basically just a small wrapper around MST's [`onSnapshot` and `applySnapshot`](https://github.com/mobxjs/mobx-state-tree#snapshots).
+The source code is currently shorter than this README, so [take a look under the hood](https://github.com/agilgur5/mst-persist/tree/master/src)! :)
 
 ## Credits
 
