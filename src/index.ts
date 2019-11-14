@@ -14,7 +14,7 @@ export interface IOptions {
 type StrToAnyMap = {[key: string]: any}
 
 export const persist: IArgs = (name, store, options = {}) => {
-  let {storage, jsonify, whitelist, blacklist} = options
+  let {storage, jsonify = true, whitelist, blacklist} = options
 
   // use AsyncLocalStorage by default (or if localStorage was passed in)
   if (
@@ -30,7 +30,6 @@ export const persist: IArgs = (name, store, options = {}) => {
       'engine via the `storage:` option.')
   }
 
-  if (!jsonify) { jsonify = true } // default to true like mobx-persist
   const whitelistDict = arrToDict(whitelist)
   const blacklistDict = arrToDict(blacklist)
 
