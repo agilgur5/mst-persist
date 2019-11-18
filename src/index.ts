@@ -34,6 +34,7 @@ export const persist: IArgs = (name, store, options = {}) => {
   const blacklistDict = arrToDict(blacklist)
 
   onSnapshot(store, (_snapshot: StrToAnyMap) => {
+    // need to shallow clone as otherwise properties are non-configurable (https://github.com/agilgur5/mst-persist/pull/21#discussion_r348105595)
     const snapshot = { ..._snapshot }
     Object.keys(snapshot).forEach((key) => {
       if (whitelist && !whitelistDict[key]) {
