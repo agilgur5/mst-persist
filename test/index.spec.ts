@@ -27,6 +27,17 @@ describe('basic persist options', () => {
     expect(getItem('user')).toStrictEqual(getSnapshot(user))
   })
 
+  it('shouldn\'t jsonify', async () => {
+    const user = UserStore.create()
+    await persist('user', user, {
+      jsonify: false
+    })
+
+    user.changeName('Joe') // fire action to trigger onSnapshot
+    // if not jsonified, localStorage will store as '[object Object]'
+    expect(window.localStorage.getItem('user')).toBe('[object Object]')
+  })
+
   it('should whitelist', async () => {
     const user = UserStore.create()
     await persist('user', user, {
