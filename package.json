@@ -29,7 +29,8 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
-    "test": "npm run build && npm pack",
+    "test": "tsdx test",
+    "test:pub": "npm run build && npm pack",
     "pub": "npm run build && npm publish",
     "changelog": "changelog-maker"
   },
@@ -39,6 +40,7 @@
   "dependencies": {},
   "devDependencies": {
     "@agilgur5/changelog-maker": "^3.0.0",
+    "@types/jest": "^24.0.23",
     "mobx": "^5.11.0",
     "mobx-state-tree": "^3.14.0",
     "tsdx": "^0.7.2",
