@@ -9,7 +9,7 @@ function getItem(key: string) {
   return item ? JSON.parse(item) : null // can only parse strings
 }
 
-describe('persist', () => {
+describe('basic persist functionality', () => {
   beforeEach(() => window.localStorage.clear())
 
   it('should persist nothing if no actions are used', async () => {
@@ -34,6 +34,10 @@ describe('persist', () => {
     await persist('user', user)
     expect(getSnapshot(user)).toStrictEqual(persistedDataF)
   })
+})
+
+describe('persist options', () => {
+  beforeEach(() => window.localStorage.clear())
 
   it('shouldn\'t jsonify', async () => {
     const user = UserStoreF.create()
