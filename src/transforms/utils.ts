@@ -10,8 +10,7 @@ export interface ITransformArgs {
 
 type StrToBoolMap = {[key: string]: boolean}
 
-export function arrToDict (arr?: Array<string>): StrToBoolMap {
-  if (!arr) { return {} }
+export function arrToDict (arr: Array<string>): StrToBoolMap {
   return arr.reduce((dict: StrToBoolMap, elem) => {
     dict[elem] = true
     return dict

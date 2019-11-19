@@ -84,7 +84,7 @@ interface ITransformArgs {
 type StrToAnyMap = {[key: string]: any}
 ```
 
-As an example, one may see how [whitelists](https://github.com/agilgur5/mst-persist/blob/229fd2b1b472ea6a7912a5a06fa079a65e3ba6fa/src/whitelistTransform.ts#L7-L14) and [blacklists](https://github.com/agilgur5/mst-persist/blob/229fd2b1b472ea6a7912a5a06fa079a65e3ba6fa/src/blacklistTransform.ts#L7-L14) are implemented internally as transforms.
+As an example, one may see how [whitelists](https://github.com/agilgur5/mst-persist/blob/9ba76aaf455f42e249dc855d66349351148a17da/src/whitelistTransform.ts#L7-L12) and [blacklists](https://github.com/agilgur5/mst-persist/blob/9ba76aaf455f42e249dc855d66349351148a17da/src/blacklistTransform.ts#L7-L12) are implemented internally as transforms.
 
 #### Transform Ordering
 
