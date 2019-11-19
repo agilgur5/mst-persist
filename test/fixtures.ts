@@ -8,3 +8,8 @@ export const UserStore = types.model('UserStore', {
     self.name = name
   }
 }))
+
+export const persistedData = {
+  name: 'Persisted Name',
+  age: 35
+}
