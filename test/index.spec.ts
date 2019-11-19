@@ -2,7 +2,7 @@
 import { getSnapshot } from 'mobx-state-tree'
 
 import { persist } from '../src/index'
-import { UserStore, persistedData } from './fixtures'
+import { UserStoreF, persistedDataF } from './fixtures'
 
 function getItem(key: string) {
   const item = window.localStorage.getItem(key)
@@ -13,14 +13,14 @@ describe('persist', () => {
   beforeEach(() => window.localStorage.clear())
 
   it('should persist nothing if no actions are used', async () => {
-    const user = UserStore.create()
+    const user = UserStoreF.create()
     await persist('user', user)
 
     expect(getItem('user')).toBe(null)
   })
 
   it('should persist snapshot when action used', async () => {
-    const user = UserStore.create()
+    const user = UserStoreF.create()
     await persist('user', user)
 
     user.changeName('Joe') // fire action to trigger onSnapshot
@@ -28,15 +28,15 @@ describe('persist', () => {
   })
 
   it('should load persisted data', async () => {
-    window.localStorage.setItem('user', JSON.stringify(persistedData))
+    window.localStorage.setItem('user', JSON.stringify(persistedDataF))
 
-    const user = UserStore.create()
+    const user = UserStoreF.create()
     await persist('user', user)
-    expect(getSnapshot(user)).toStrictEqual(persistedData)
+    expect(getSnapshot(user)).toStrictEqual(persistedDataF)
   })
 
   it('shouldn\'t jsonify', async () => {
-    const user = UserStore.create()
+    const user = UserStoreF.create()
     await persist('user', user, {
       jsonify: false
     })
@@ -47,7 +47,7 @@ describe('persist', () => {
   })
 
   it('should whitelist', async () => {
-    const user = UserStore.create()
+    const user = UserStoreF.create()
     await persist('user', user, {
       whitelist: ['name']
     })
@@ -59,7 +59,7 @@ describe('persist', () => {
   })
 
   it('should blacklist', async () => {
-    const user = UserStore.create()
+    const user = UserStoreF.create()
     await persist('user', user, {
       blacklist: ['age']
     })

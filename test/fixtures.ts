@@ -1,6 +1,6 @@
 import { types } from 'mobx-state-tree'
 
-export const UserStore = types.model('UserStore', {
+export const UserStoreF = types.model('UserStore', {
   name: 'John Doe',
   age: 32
 }).actions((self) => ({
@@ -9,7 +9,7 @@ export const UserStore = types.model('UserStore', {
   }
 }))
 
-export const persistedData = {
+export const persistedDataF = {
   name: 'Persisted Name',
   age: 35
 }
