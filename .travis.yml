@@ -1,6 +1,6 @@
 language: node_js
 # default is the very old 0.10.48; match local version instead
-node_js: '8.9'
+node_js: '10.16.0'
 
 script: npm test -- --coverage
 after_script:
