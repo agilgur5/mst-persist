@@ -2,14 +2,14 @@
 import { getSnapshot } from 'mobx-state-tree'
 
 import { persist } from '../src/index'
-import { UserStore } from './fixtures'
+import { UserStore, persistedData } from './fixtures'
 
 function getItem(key: string) {
   const item = window.localStorage.getItem(key)
   return item ? JSON.parse(item) : null // can only parse strings
 }
 
-describe('basic persist options', () => {
+describe('persist', () => {
   beforeEach(() => window.localStorage.clear())
 
   it('should persist nothing if no actions are used', async () => {
@@ -25,6 +25,14 @@ describe('basic persist options', () => {
 
     user.changeName('Joe') // fire action to trigger onSnapshot
     expect(getItem('user')).toStrictEqual(getSnapshot(user))
+  })
+
+  it('should load persisted data', async () => {
+    window.localStorage.setItem('user', JSON.stringify(persistedData))
+
+    const user = UserStore.create()
+    await persist('user', user)
+    expect(getSnapshot(user)).toStrictEqual(persistedData)
   })
 
   it('shouldn\'t jsonify', async () => {
