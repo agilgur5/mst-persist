@@ -85,6 +85,7 @@ type StrToAnyMap = {[key: string]: any}
 ```
 
 As an example, one may see how [whitelists](https://github.com/agilgur5/mst-persist/blob/9ba76aaf455f42e249dc855d66349351148a17da/src/whitelistTransform.ts#L7-L12) and [blacklists](https://github.com/agilgur5/mst-persist/blob/9ba76aaf455f42e249dc855d66349351148a17da/src/blacklistTransform.ts#L7-L12) are implemented internally as transforms.
+Another example would be how the [transform test fixtures](https://github.com/agilgur5/mst-persist/blob/d3aa4476f92a087c882dccf8530a37096d8c64ed/test/fixtures.ts#L19-L34) are implemented internally.
 
 #### Transform Ordering
 
