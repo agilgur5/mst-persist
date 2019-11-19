@@ -2,5 +2,8 @@ language: node_js
 # default is the very old 0.10.48; match local version instead
 node_js: '8.9'
 
-script: npm test
-after_script: npm run test:pub
+script: npm test -- --coverage
+after_script:
+  # upload coverage reports to CodeCov
+  - bash <(curl -s https://codecov.io/bash)
+  - npm run test:pub
