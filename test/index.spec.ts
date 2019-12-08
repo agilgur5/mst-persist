@@ -1,4 +1,4 @@
-/// <reference types="@types/jest" />
+import { describe, it, expect, beforeEach } from 'jest-without-globals'
 import { getSnapshot } from 'mobx-state-tree'
 
 import { persist } from '../src/index'

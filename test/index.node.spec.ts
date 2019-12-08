@@ -3,7 +3,7 @@
  */
 // add tests in this file that are specific to node (vs. jsdom)
 
-/// <reference types="@types/jest" />
+import { describe, it, expect } from 'jest-without-globals'
 
 import { persist } from '../src/index'
 import { UserStoreF } from './fixtures'
