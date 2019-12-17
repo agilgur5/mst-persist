@@ -2,11 +2,15 @@ import { describe, it, expect, beforeEach } from 'jest-without-globals'
 import { getSnapshot } from 'mobx-state-tree'
 
 import { persist } from '../src/index'
-import { UserStoreF, persistedDataF } from './fixtures'
+import { UserStoreF, persistedDataF, storeNameAsF, retrieveNameAsF } from './fixtures'
 
 function getItem(key: string) {
   const item = window.localStorage.getItem(key)
   return item ? JSON.parse(item) : null // can only parse strings
+}
+
+function setItem(key: string, value: object) {
+  return window.localStorage.setItem(key, JSON.stringify(value))
 }
 
 describe('basic persist functionality', () => {
@@ -28,15 +32,16 @@ describe('basic persist functionality', () => {
   })
 
   it('should load persisted data', async () => {
-    window.localStorage.setItem('user', JSON.stringify(persistedDataF))
+    setItem('user', persistedDataF)
 
     const user = UserStoreF.create()
     await persist('user', user)
+
     expect(getSnapshot(user)).toStrictEqual(persistedDataF)
   })
 })
 
-describe('persist options', () => {
+describe('basic persist options', () => {
   beforeEach(() => window.localStorage.clear())
 
   it('shouldn\'t jsonify', async () => {
@@ -72,5 +77,32 @@ describe('persist options', () => {
     const snapshot = { ...getSnapshot(user) } // need to shallow clone as otherwise properties are non-configurable (https://github.com/agilgur5/mst-persist/pull/21#discussion_r348105595)
     delete snapshot['age']
     expect(getItem('user')).toStrictEqual(snapshot)
+  })
+})
+
+describe('transforms', () => {
+  beforeEach(() => window.localStorage.clear())
+
+  it('should apply toStorage transforms in order', async () => {
+    const user = UserStoreF.create()
+    await persist('user', user, {
+      transforms: [storeNameAsF('Jack'), storeNameAsF('Joe')]
+    })
+
+    user.changeName('Not Joe') // fire action to trigger onSnapshot
+    expect(getItem('user').name).toBe('Joe')
+  })
+
+  it('should apply fromStorage transforms in reverse order', async () => {
+    const persistedData = {...persistedDataF}
+    persistedData.name = 'Not Joe'
+    setItem('user', persistedData)
+
+    const user = UserStoreF.create()
+    await persist('user', user, {
+      transforms: [retrieveNameAsF('Joe'), retrieveNameAsF('Jack')]
+    })
+
+    expect(getSnapshot(user).name).toBe('Joe')
   })
 })
