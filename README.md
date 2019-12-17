@@ -84,8 +84,35 @@ interface ITransformArgs {
 type StrToAnyMap = {[key: string]: any}
 ```
 
-As an example, one may see how [whitelists](https://github.com/agilgur5/mst-persist/blob/9ba76aaf455f42e249dc855d66349351148a17da/src/whitelistTransform.ts#L7-L12) and [blacklists](https://github.com/agilgur5/mst-persist/blob/9ba76aaf455f42e249dc855d66349351148a17da/src/blacklistTransform.ts#L7-L12) are implemented internally as transforms.
-Another example would be how the [transform test fixtures](https://github.com/agilgur5/mst-persist/blob/d3aa4476f92a087c882dccf8530a37096d8c64ed/test/fixtures.ts#L19-L34) are implemented internally.
+You can create your own transforms to serve a variety of needs.
+For example, if you wanted to only store the most recent posts:
+
+```typescript
+import { persist, ITransform } from 'mst-persist'
+
+import { FeedStore } from '../stores'
+
+const feedStore = FeedStore.create()
+
+const twoDaysAgo = new Date()
+twoDaysAgo.setDate(twoDaysAgo.getDate() - 2)
+
+const onlyRecentPosts: ITransform = {
+  toStorage: (snapshot) => {
+    snapshot.posts = snapshot.posts.filter(
+      // note that a snapshotted Date is a string
+      post => new Date(post.date) > twoDaysAgo
+    )
+    return snapshot
+  }
+}
+
+persist('feed', feedStore, {
+  transforms: [onlyRecentPosts]
+})
+```
+
+For some other examples, one may see how [whitelists](https://github.com/agilgur5/mst-persist/blob/9ba76aaf455f42e249dc855d66349351148a17da/src/whitelistTransform.ts#L7-L12) and [blacklists](https://github.com/agilgur5/mst-persist/blob/9ba76aaf455f42e249dc855d66349351148a17da/src/blacklistTransform.ts#L7-L12) are implemented internally as transforms, as well as how the [transform test fixtures](https://github.com/agilgur5/mst-persist/blob/d3aa4476f92a087c882dccf8530a37096d8c64ed/test/fixtures.ts#L19-L34) are implemented internally.
 
 #### Transform Ordering
 
@@ -127,7 +154,7 @@ Can view the commit that implements it [here](https://github.com/agilgur5/react-
 ## How it works
 
 Basically a small wrapper around MST's [`onSnapshot` and `applySnapshot`](https://github.com/mobxjs/mobx-state-tree#snapshots).
-The source code is not much longer than this README, so [take a look under the hood](https://github.com/agilgur5/mst-persist/tree/master/src)! :)
+The source code is roughly the size of this README, so [take a look under the hood](https://github.com/agilgur5/mst-persist/tree/master/src)! :)
 
 ## Credits
 
