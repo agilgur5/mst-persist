@@ -28,6 +28,7 @@ Persist and hydrate [MobX-state-tree](https://github.com/mobxjs/mobx-state-tree)
 import { types } from 'mobx-state-tree'
 import localForage from 'localForage'
 import { persist } from 'mst-persist'
+import { whitelistKeys } from 'mst-persist/transforms'
 
 const SomeStore = types.model('Store', {
   name: 'John Doe',
@@ -39,9 +40,11 @@ const someStore = SomeStore.create()
 persist('some', someStore, {
   storage: localForage,  // or AsyncStorage in react-native.
                          // default: localStorage
-  jsonify: false  // if you use AsyncStorage, this shoud be true
-                  // default: true
-  whitelist: ['name']  // only these keys will be persisted
+  jsonify: false,  // if you use AsyncStorage, this should be true
+                   // default: true
+  transforms: [
+    whitelistKeys(['name']) // only these keys will be persisted
+  ]
 }).then(() => console.log('someStore has been hydrated'))
 
 ```
@@ -61,11 +64,21 @@ persist('some', someStore, {
       <br>
       Any of [`redux-persist`'s Storage Engines](https://github.com/rt2zz/redux-persist#storage-engines) should also be compatible with `mst-persist`.
     - **jsonify** *bool* Enables serialization as JSON (default: `true`).
-    - **whitelist** *Array\<string\>* Only these keys will be persisted (defaults to all keys).
-    - **blacklist** *Array\<string\>* These keys will not be persisted (defaults to all keys).
     - **transforms** *Array\<[Transform](#transforms)\>* [Transforms](#transforms) to apply to snapshots on the way to and from storage.
 
 - returns a void Promise
+
+#### From `mst-persist/transforms`
+
+##### `whitelistKeys(keys)`
+
+- arguments
+  - **keys** *Array\<string\>* Only these keys will be persisted (by default, all keys are persisted).
+
+##### `blacklistKeys(keys)`
+
+- arguments
+  - **keys** *Array\<string\>* These keys will not be persisted (by default, all keys are persisted).
 
 ### Transforms
 

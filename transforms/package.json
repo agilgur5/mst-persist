@@ -1,0 +1,5 @@
+{
+  "main": "../dist/transforms/index.js",
+  "module": "../dist/transforms/index.esm.js",
+  "typings": "../dist/transforms/index.d.ts"
+}
