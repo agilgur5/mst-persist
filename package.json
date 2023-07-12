@@ -37,7 +37,7 @@
     "changelog": "changelog-maker"
   },
   "peerDependencies": {
-    "mobx-state-tree": "^3.2.1"
+    "mobx-state-tree": "^5.1.8"
   },
   "dependencies": {},
   "devDependencies": {
