@@ -43,8 +43,8 @@
   "devDependencies": {
     "@agilgur5/changelog-maker": "^3.0.0",
     "jest-without-globals": "^0.0.2",
-    "mobx": "^5.11.0",
-    "mobx-state-tree": "^3.14.0",
+    "mobx": "^6.3.0",
+    "mobx-state-tree": "^5.1.8",
     "tsdx": "github:agilgur5/tsdx#dist",
     "typescript": "^3.5.2"
   }
