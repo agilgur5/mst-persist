@@ -29,7 +29,7 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
-    "tsc": "tsc --noEmit",
+    "tsc": "tsc --noEmit --skipLibCheck",
     "test": "tsdx test",
     "test:coverage": "tsdx test --coverage",
     "test:pub": "npm run build && npm pack",
