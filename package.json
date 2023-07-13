@@ -29,7 +29,9 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
+    "tsc": "tsc --noEmit",
     "test": "tsdx test",
+    "test:coverage": "tsdx test --coverage",
     "test:pub": "npm run build && npm pack",
     "pub": "npm run build && npm publish",
     "changelog": "changelog-maker"
