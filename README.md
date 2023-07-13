@@ -10,17 +10,17 @@
 [![dm](https://img.shields.io/npm/dm/mst-persist.svg)](https://npmjs.org/package/mst-persist)
 [![dw](https://img.shields.io/npm/dw/mst-persist.svg)](https://npmjs.org/package/mst-persist)
 <br><!-- status / activity -->
-[![typings](https://img.shields.io/npm/types/mst-persist.svg)](https://github.com/agilgur5/mst-persist/blob/master/src/index.ts)
+[![typings](https://img.shields.io/npm/types/mst-persist.svg)](src/index.ts)
 [![build status](https://img.shields.io/github/actions/workflow/status/agilgur5/mst-persist/ci.yml?branch=main)](https://github.com/agilgur5/mst-persist/actions/workflows/ci.yml?query=branch%3Amain)
 [![code coverage](https://img.shields.io/codecov/c/gh/agilgur5/mst-persist/master.svg)](https://codecov.io/gh/agilgur5/mst-persist)
-<br>
-[![NPM](https://nodei.co/npm/mst-persist.png?downloads=true&downloadRank=true&stars=true)](https://npmjs.org/package/mst-persist)
 
 Persist and hydrate [MobX-state-tree](https://github.com/mobxjs/mobx-state-tree) stores.
 
 ## Installation
 
-`npm i -S mst-persist`
+```sh
+npm i -S mst-persist
+```
 
 ## Usage
 
