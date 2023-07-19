@@ -31,6 +31,7 @@
     "build": "tsdx build",
     "tsc": "tsc --noEmit --skipLibCheck",
     "test": "tsdx test",
+    "test:watch": "tsdx test --watch",
     "test:coverage": "tsdx test --coverage",
     "test:pub": "npm run build && npm pack",
     "pub": "npm run build && npm publish",

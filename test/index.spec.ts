@@ -53,7 +53,7 @@ describe('persist options', () => {
   it('should whitelist', async () => {
     const user = UserStoreF.create()
     await persist('user', user, {
-      whitelist: ['name']
+      whitelist: ['name', 'hasDogs']
     })
 
     user.changeName('Joe') // fire action to trigger onSnapshot
