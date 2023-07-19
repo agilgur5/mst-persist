@@ -6,6 +6,7 @@
 import { describe, it, expect } from 'jest-without-globals'
 
 import { persist } from '../src/index'
+
 import { UserStoreF } from './fixtures'
 
 describe('node usage', () => {

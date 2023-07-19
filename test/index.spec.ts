@@ -2,14 +2,11 @@ import { describe, it, expect, beforeEach } from 'jest-without-globals'
 import { getSnapshot } from 'mobx-state-tree'
 
 import { persist } from '../src/index'
-import { UserStoreF, persistedDataF } from './fixtures'
 
-function getItem(key: string) {
-  const item = window.localStorage.getItem(key)
-  return item ? JSON.parse(item) : null // can only parse strings
-}
+import { getItem } from './helpers'
+import { UserStoreF, persistedUserDataF } from './fixtures'
 
-describe('basic persist functionality', () => {
+describe('basic persist functionality with primitves', () => {
   beforeEach(() => window.localStorage.clear())
 
   it('should persist nothing if no actions are used', async () => {
@@ -24,15 +21,16 @@ describe('basic persist functionality', () => {
     await persist('user', user)
 
     user.changeName('Joe') // fire action to trigger onSnapshot
+    expect(user.name).toBe('Joe')
     expect(getItem('user')).toStrictEqual(getSnapshot(user))
   })
 
   it('should load persisted data', async () => {
-    window.localStorage.setItem('user', JSON.stringify(persistedDataF))
+    window.localStorage.setItem('user', JSON.stringify(persistedUserDataF))
 
     const user = UserStoreF.create()
     await persist('user', user)
-    expect(getSnapshot(user)).toStrictEqual(persistedDataF)
+    expect(getSnapshot(user)).toStrictEqual(persistedUserDataF)
   })
 })
 
@@ -59,6 +57,7 @@ describe('persist options', () => {
     user.changeName('Joe') // fire action to trigger onSnapshot
     const snapshot = { ...getSnapshot(user) } // need to shallow clone as otherwise properties are non-configurable (https://github.com/agilgur5/mst-persist/pull/21#discussion_r348105595)
     delete snapshot['age']
+    expect(snapshot.name).toBe('Joe')
     expect(getItem('user')).toStrictEqual(snapshot)
   })
 
@@ -71,6 +70,7 @@ describe('persist options', () => {
     user.changeName('Joe') // fire action to trigger onSnapshot
     const snapshot = { ...getSnapshot(user) } // need to shallow clone as otherwise properties are non-configurable (https://github.com/agilgur5/mst-persist/pull/21#discussion_r348105595)
     delete snapshot['age']
+    expect(snapshot.name).toBe('Joe')
     expect(getItem('user')).toStrictEqual(snapshot)
   })
 })

@@ -86,6 +86,8 @@ With this conditional check, your store will only be hydrated client-side.
 None yet, but can take a look at [agilgur5/react-native-manga-reader-app](https://github.com/agilgur5/react-native-manga-reader-app) which uses it in production.
 Can view the commit that implements it [here](https://github.com/agilgur5/react-native-manga-reader-app/pull/2/commits/286725f417d321f25d16ee3858b0e7e6b7886e77).
 
+Can also view some of the internal [tests](test/).
+
 ## How it works
 
 Basically just a small wrapper around MST's [`onSnapshot` and `applySnapshot`](https://github.com/mobxjs/mobx-state-tree#snapshots).
